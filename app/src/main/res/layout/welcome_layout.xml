@@ -20,6 +20,6 @@
          android:textSize="16sp"
          android:textColor="@color/color_white"
          android:layout_width="150dp"
-         android:layout_height="wrap_content"
+         android:layout_height="35dp"
          android:background="@drawable/head_bt_bg"/>
 </RelativeLayout>

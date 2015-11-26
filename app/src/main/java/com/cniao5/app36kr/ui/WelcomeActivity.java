@@ -10,7 +10,6 @@ import android.widget.Button;
 import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.ui.base.BaseActivity;
 import com.cniao5.app36kr.widget.CustomVideoView;
-
 /**
  * 当前类注释:启动欢迎界面
  * ProjectName：App36Kr

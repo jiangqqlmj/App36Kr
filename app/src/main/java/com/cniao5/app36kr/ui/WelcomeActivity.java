@@ -1,9 +1,13 @@
 package com.cniao5.app36kr.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
@@ -35,6 +39,7 @@ public class WelcomeActivity extends BaseActivity {
                 welcome_videoview.start();
             }
         });
+        welcome_button.setText("进入菜鸟新闻"+getAppVersionName(this));
         welcome_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,4 +52,20 @@ public class WelcomeActivity extends BaseActivity {
             }
         });
     }
+
+    private  String getAppVersionName(Context context) {
+        String versionName = "";
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageInfo(this.getPackageName(), 0);
+            versionName = packageInfo.versionName;
+            if (TextUtils.isEmpty(versionName)) {
+                return "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return versionName;
+    }
+
 }

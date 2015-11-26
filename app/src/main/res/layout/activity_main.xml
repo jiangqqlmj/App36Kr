@@ -1,0 +1,31 @@
+<com.cniao5.app36kr.widget.DragLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drag_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/head_bg"
+    >
+    <!--1.底部功能(左侧侧滑功能布局)-->
+    <include layout="@layout/left_view_layout"/>
+    <!--2.上层主界面View  main view布局-->
+    <com.cniao5.app36kr.widget.CustomRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        >
+        <!--顶部导航栏布局-->
+        <include layout="@layout/top_bar_common_layout"/>
+        <!--中间内容后面放入Fragment-->
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+            <TextView
+                android:id="@+id/iv_noimg"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="中间内容容器..."
+                />
+        </FrameLayout>
+    </com.cniao5.app36kr.widget.CustomRelativeLayout>
+</com.cniao5.app36kr.widget.DragLayout>

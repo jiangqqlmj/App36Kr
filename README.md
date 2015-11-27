@@ -8,3 +8,5 @@
 
 ###菜鸟新闻演示效果
 <img src="https://github.com/jiangqqlmj/App36Kr/blob/master/pull_1.gif"/>
+
+###<a href="http://blog.csdn.net/developer_jiangqq">关于本人</a>

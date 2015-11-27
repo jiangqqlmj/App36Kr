@@ -44,18 +44,30 @@ public class MainActivity extends BaseActivity implements DefineView{
 
     }
     class CustomDragListener implements DragLayout.DragListener{
-        //界面打开的时候
+
+        /**
+         * 界面打开
+         */
         @Override
         public void onOpen() {
+
         }
-        //界面关闭的时候
+
+        /**
+         * 界面关闭
+         */
         @Override
         public void onClose() {
+
         }
-        //界面滑动的时候
+
+        /**
+         * 界面进行滑动
+         * @param percent
+         */
         @Override
         public void onDrag(float percent) {
-            ViewHelper.setAlpha(top_bar_icon, 1 - percent);
+              ViewHelper.setAlpha(top_bar_icon,1-percent);
         }
     }
     class CustomOnClickListener implements View.OnClickListener{

@@ -1,5 +1,5 @@
 package com.cniao5.app36kr.ui.base;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
@@ -16,5 +16,10 @@ public class BaseActivity extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    }
+
+    protected void openActivity(Class<?> pClass){
+        Intent mIntent=new Intent(this,pClass);
+        this.startActivity(mIntent);
     }
 }

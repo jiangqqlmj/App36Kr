@@ -31,23 +31,23 @@ public class WelcomeActivity extends BaseActivity {
         setContentView(R.layout.welcome_layout);
         welcome_button=(Button)this.findViewById(R.id.welcome_button);
         welcome_videoview = (CustomVideoView) this.findViewById(R.id.welcome_videoview);
-        welcome_videoview.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.kr36));
+        welcome_videoview.setVideoURI(Uri.parse("android.resource://"+this.getPackageName()+"/"+R.raw.kr36));
         welcome_videoview.start();
         welcome_videoview.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 welcome_videoview.start();
+
             }
         });
-        welcome_button.setText("进入菜鸟新闻"+getAppVersionName(this));
         welcome_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(welcome_videoview.isPlaying()){
                     welcome_videoview.stopPlayback();
+                    welcome_videoview=null;
                 }
-                Intent mIntent=new Intent(WelcomeActivity.this,MainActivity.class);
-                WelcomeActivity.this.startActivity(mIntent);
+                openActivity(MainActivity.class);
                 WelcomeActivity.this.finish();
             }
         });

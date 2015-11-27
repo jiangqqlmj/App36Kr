@@ -10,9 +10,9 @@
 <img src="https://github.com/jiangqqlmj/App36Kr/blob/master/pull_1.gif"/>
 
 ###<a href="http://blog.csdn.net/developer_jiangqq">关于本人</a>
-邮箱:jiangqqlmj@163.com
-本人微信/QQ:781931404
-Android技术交流群:99787482
-<img src="http://img.blog.csdn.net/20151121085753187"/>
-Android开发群1:107086751
-Android开发群3:109244103
+邮箱:jiangqqlmj@163.com</br>
+本人微信/QQ:781931404</br>
+Android技术交流群:99787482</br>
+<img src="http://img.blog.csdn.net/20151121085753187"/></br>
+Android开发群1:107086751</br>
+Android开发群3:109244103</br>

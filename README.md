@@ -5,3 +5,6 @@
 
 ###本人录制的其他视频
 1.Android Annotations注入框架视频:http://www.cniao5.com/course/10074</br>
+
+###菜鸟新闻演示效果
+<img src="https://github.com/jiangqqlmj/App36Kr/blob/master/pull_1.gif"/>

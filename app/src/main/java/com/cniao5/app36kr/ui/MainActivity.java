@@ -22,6 +22,7 @@ public class MainActivity extends BaseActivity implements DefineView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setStatusBar();
         initView();
         initValidata();
         initListener();

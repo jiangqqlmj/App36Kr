@@ -2,8 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
      android:layout_width="match_parent"
      android:layout_height="49dp"
-     android:background="@color/color_white"
+     android:background="@color/mask_tags_8"
+     android:id="@+id/bar_layout"
+     android:gravity="bottom"
     >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="49dp">
         <ImageView
             android:id="@+id/top_bar_icon"
             android:layout_width="40dp"
@@ -20,6 +25,7 @@
             android:text="@string/app_name"
             android:layout_centerInParent="true"
             android:textSize="16sp"
+            android:textColor="@color/color_white"
             />
         <!--搜索图标-->
         <Button
@@ -29,7 +35,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginRight="8dp"
-            android:background="@drawable/icon_search"/>
+            android:background="@drawable/btn_serach_selector"/>
 
         <ImageView
             android:layout_width="fill_parent"
@@ -38,4 +44,5 @@
             android:background="#EEEEEE"
             android:scaleType="fitXY"
              />
-    </RelativeLayout>
+ </RelativeLayout>
+</RelativeLayout>

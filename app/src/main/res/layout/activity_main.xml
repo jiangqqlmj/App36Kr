@@ -12,6 +12,11 @@
         android:layout_height="match_parent"
         android:background="#FFFFFF"
         >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:gravity="bottom">
         <!--顶部导航栏布局-->
         <include layout="@layout/top_bar_common_layout"/>
         <!--中间内容后面放入Fragment-->
@@ -27,5 +32,6 @@
                 android:text="中间内容容器..."
                 />
         </FrameLayout>
+        </LinearLayout>
     </com.cniao5.app36kr.widget.CustomRelativeLayout>
 </com.cniao5.app36kr.widget.DragLayout>

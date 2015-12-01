@@ -11,8 +11,8 @@
         android:gravity="center"
         android:textColor="@color/color_tab_title"
         android:layout_marginLeft="12dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginBottom="9dp"
         android:layout_marginRight="12dp"
         android:id="@+id/horizontal_tv_type"
         android:layout_width="wrap_content"
@@ -23,5 +23,5 @@
         android:layout_gravity="bottom"
         android:scaleType="fitXY"
         android:layout_width="fill_parent"
-        android:layout_height="3dp" />
+        android:layout_height="5dp" />
 </LinearLayout>

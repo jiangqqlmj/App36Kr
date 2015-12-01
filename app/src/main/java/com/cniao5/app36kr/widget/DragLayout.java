@@ -63,10 +63,9 @@ public class DragLayout extends FrameLayout {
     class YScrollDetector extends SimpleOnGestureListener {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float dx, float dy) {
-            return Math.abs(dy) <= Math.abs(dx);
+            return Math.abs(dy) <= Math.abs(dx)&&isDrag!=false;
         }
     }
-
     /**
      * 实现子View的拖拽滑动，实现Callback当中相关的方法
      */
@@ -386,4 +385,11 @@ public class DragLayout extends FrameLayout {
         }
     }
 
+    private boolean isDrag=true;
+    public void setIsDrag(boolean isDrag) {
+        this.isDrag = isDrag;
+        if(isDrag){
+            dragHelper.abort();
+        }
+    }
 }

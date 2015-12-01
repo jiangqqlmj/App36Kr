@@ -16,8 +16,13 @@ import com.nineoldandroids.view.ViewHelper;
  * 打造极致课程，是菜鸟窝不变的承诺
  */
 public class MainActivity extends BaseActivity implements DefineView{
+    public DragLayout getDrag_layout() {
+        return drag_layout;
+    }
     private DragLayout drag_layout;
     private ImageView top_bar_icon;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

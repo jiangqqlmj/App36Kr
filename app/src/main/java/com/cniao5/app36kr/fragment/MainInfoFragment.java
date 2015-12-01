@@ -3,6 +3,7 @@ package com.cniao5.app36kr.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chinaztt.fda.viewpagerindicator.TabPageIndicator;
 import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.adapter.FixedPagerAdapter;
 import com.cniao5.app36kr.application.CNKApplication;
@@ -62,6 +64,8 @@ public class MainInfoFragment extends BaseFragment implements ViewPager.OnPageCh
      * 水平滚动X
      */
     private int mScrollX=0;
+
+    private int mScreenWidth;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(mView==null){
@@ -87,6 +91,10 @@ public class MainInfoFragment extends BaseFragment implements ViewPager.OnPageCh
      * 初始化参数数据
      */
     private void initValidata(){
+         DisplayMetrics dm=new DisplayMetrics();
+         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+         mScreenWidth=dm.widthPixels;
+
          mColorSelected= CNKApplication.getInstance().getResources().getColor(R.color.mask_tags_8);
          mColorUnSelected=CNKApplication.getInstance().getResources().getColor(R.color.color_tab_title);
          addScrollView(titles);
@@ -113,6 +121,7 @@ public class MainInfoFragment extends BaseFragment implements ViewPager.OnPageCh
         fragments.add(new FourFragment());
 
         mPagerAdater=new FixedPagerAdapter(getChildFragmentManager());
+        //mPagerAdater.setTitles(titles);
         mPagerAdater.setFragments(fragments);
         info_viewpager.setAdapter(mPagerAdater);
         //id_indicator.setViewPager(info_viewpager, 0);
@@ -137,12 +146,10 @@ public class MainInfoFragment extends BaseFragment implements ViewPager.OnPageCh
                 //已经选中
                 type_name.setTextColor(mColorSelected);
                 img_type.setImageResource(R.drawable.bottom_line_blue);
-                //linearLayout.setBackgroundResource(R.drawable.bottom_line_blue);
             }else {
                 //未选中
                 type_name.setTextColor(mColorUnSelected);
                 img_type.setImageResource(R.drawable.bottom_line_gray);
-                //linearLayout.setBackgroundResource(R.drawable.bottom_line_gray);
             }
             final int index=i;
             //点击顶部Tab标签，动态设置下面的ViewPager页面
@@ -189,8 +196,9 @@ public class MainInfoFragment extends BaseFragment implements ViewPager.OnPageCh
         View currentItem=mClassContainer.getChildAt(mCurClassIndex);
         ((ImageView)(currentItem.findViewById(R.id.horizontal_img_type))).setImageResource(R.drawable.bottom_line_blue);
         ((TextView)(currentItem.findViewById(R.id.horizontal_tv_type))).setTextColor(mColorSelected);
-
-        mScrollX=currentItem.getLeft();
+        //这边移动的距离 是经过计算粗略得出来的
+        mScrollX=currentItem.getLeft()-300;
+        Log.d("zttjiangqq","mScrollX:"+mScrollX);
         mScrollBar.post(new Runnable() {
             @Override
             public void run() {

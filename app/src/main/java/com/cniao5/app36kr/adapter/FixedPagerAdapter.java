@@ -17,6 +17,16 @@ import java.util.List;
  * 公司：江苏中天科技软件技术有限公司
  */
 public class FixedPagerAdapter extends FragmentStatePagerAdapter {
+    private String[] titles;
+
+    public String[] getTitles() {
+        return titles;
+    }
+
+    public void setTitles(String[] titles) {
+        this.titles = titles;
+    }
+
     private List<Fragment> fragments;
     public FixedPagerAdapter(FragmentManager fm) {
         super(fm);

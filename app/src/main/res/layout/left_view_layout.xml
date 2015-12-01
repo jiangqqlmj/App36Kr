@@ -15,26 +15,46 @@
                 android:id="@+id/iv_bottom"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@mipmap/ic_launcher" />
-            <TextView
-                android:layout_width="wrap_content"
+                android:src="@drawable/icon_avatar" />
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:text="名字:jiangqqlmj"
-                android:textColor="#ffffff"
-                android:textSize="18sp" />
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
+                <TextView
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:id="@+id/left_view_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="jiangqqlmj"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+                <TextView
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginTop="8dp"
+                    android:paddingLeft="10dp"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+                    android:id="@+id/left_view_description"
+                    android:text="菜鸟窝高级会员"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
-        <!--底部信息栏-->
-        <TextView
-            android:id="@+id/tv_mail"
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="jiangqqlmj@163.com"
-            android:textColor="#ffffff"
-            android:textSize="15sp" />
         <!--中间信息列表-->
-
+        <ListView
+            android:id="@+id/left_view_lv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@android:color/transparent"
+            android:listSelector="@drawable/lv_item_selector"
+            android:divider="@drawable/bottom_line_gray"
+            android:dividerHeight="1dp"
+            android:layout_marginTop="100dp"/>
 </RelativeLayout>

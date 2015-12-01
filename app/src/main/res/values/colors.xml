@@ -3,7 +3,8 @@
     <color name="color_white">#FFFFFF</color>
     <color name="color_black">#000000</color>
     <color name="color_tab_title">#777777</color>
-    <color name="color_transparent">#FFFFFFFF</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="color_lv_selector">#aaeeeeee</color>
 
     <!--标签背景颜色-->
     <color name="mask_tags_1">#f45170</color>

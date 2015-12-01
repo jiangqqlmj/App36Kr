@@ -171,12 +171,9 @@ public class MainInfoFragment extends BaseFragment implements ViewPager.OnPageCh
             mClassContainer.addView(view);
         }
     }
-
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
     }
-
     @Override
     public void onPageSelected(int position) {
         //id_indicator.setCurrentItem(position);
@@ -198,7 +195,7 @@ public class MainInfoFragment extends BaseFragment implements ViewPager.OnPageCh
         ((TextView)(currentItem.findViewById(R.id.horizontal_tv_type))).setTextColor(mColorSelected);
         //这边移动的距离 是经过计算粗略得出来的
         mScrollX=currentItem.getLeft()-300;
-        Log.d("zttjiangqq","mScrollX:"+mScrollX);
+        Log.d("zttjiangqq", "mScrollX:" + mScrollX);
         mScrollBar.post(new Runnable() {
             @Override
             public void run() {

@@ -16,7 +16,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/icon_avatar"
             />
         <TextView
             android:id="@+id/top_bar_title"

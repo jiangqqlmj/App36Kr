@@ -1,12 +1,22 @@
 package com.cniao5.app36kr.ui;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
+
 import com.cniao5.app36kr.R;
+import com.cniao5.app36kr.adapter.LeftMenuAdapter;
 import com.cniao5.app36kr.common.DefineView;
+import com.cniao5.app36kr.entity.LeftItemMenu;
 import com.cniao5.app36kr.ui.base.BaseActivity;
 import com.cniao5.app36kr.widget.DragLayout;
 import com.nineoldandroids.view.ViewHelper;
+
+import java.util.List;
+
 /**
  * 当前类注释:主Activity类
  * ProjectName：App36Kr
@@ -21,8 +31,7 @@ public class MainActivity extends BaseActivity implements DefineView{
     }
     private DragLayout drag_layout;
     private ImageView top_bar_icon;
-
-
+    private ListView left_view_lv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +45,11 @@ public class MainActivity extends BaseActivity implements DefineView{
     public void initView() {
         drag_layout = (DragLayout) findViewById(R.id.drag_layout);
         top_bar_icon = (ImageView) findViewById(R.id.top_bar_icon);
+        left_view_lv=(ListView)findViewById(R.id.left_view_lv);
     }
     @Override
     public void initValidata() {
+
     }
     @Override
     public void initListener() {
@@ -47,7 +58,7 @@ public class MainActivity extends BaseActivity implements DefineView{
     }
     @Override
     public void bindData() {
-
+        left_view_lv.setAdapter(new LeftMenuAdapter(this));
     }
     class CustomDragListener implements DragLayout.DragListener{
 
@@ -73,7 +84,7 @@ public class MainActivity extends BaseActivity implements DefineView{
          */
         @Override
         public void onDrag(float percent) {
-              ViewHelper.setAlpha(top_bar_icon,1-percent);
+              ViewHelper.setAlpha(top_bar_icon, 1 - percent);
         }
     }
     class CustomOnClickListener implements View.OnClickListener{
@@ -82,5 +93,4 @@ public class MainActivity extends BaseActivity implements DefineView{
             drag_layout.open();
         }
     }
-
 }

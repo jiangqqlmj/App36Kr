@@ -1,16 +1,13 @@
 package com.cniao5.app36kr.ui;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.BaseAdapter;
+
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.adapter.LeftMenuAdapter;
 import com.cniao5.app36kr.common.DefineView;
-import com.cniao5.app36kr.entity.LeftItemMenu;
 import com.cniao5.app36kr.ui.base.BaseActivity;
 import com.cniao5.app36kr.widget.DragLayout;
 import com.nineoldandroids.view.ViewHelper;

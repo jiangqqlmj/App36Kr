@@ -21,6 +21,8 @@
             android:id="@+id/linearlayout_container"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:orientation="horizontal">
         </LinearLayout>
     </HorizontalScrollView>

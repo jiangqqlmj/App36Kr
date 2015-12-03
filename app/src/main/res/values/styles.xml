@@ -6,6 +6,9 @@
         <!-- Customize your theme here. -->
         <item name="android:windowNoTitle">true</item>
     </style>
+    <style name="App_Theme" parent="Theme.AppCompat">
+        <item name="android:windowNoTitle">true</item>
+    </style>
     <style name="MyWidget.TabPageIndicator" parent="Widget">
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/vpi__tab_indicator</item>

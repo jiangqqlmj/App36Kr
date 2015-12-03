@@ -5,8 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.cniao5.app36kr.R;
+
+import org.w3c.dom.Text;
 
 /**
  * 当前类注释:第一个Fragment
@@ -23,6 +26,11 @@ public class OneFragment  extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(mView==null){
             mView=inflater.inflate(R.layout.one_frag_layout,container,false);
+            TextView tv_title=(TextView)mView.findViewById(R.id.tv_title);
+            Bundle bundle=getArguments();
+            if(bundle!=null){
+                tv_title.setText(bundle.getString("extra"));
+            }
         }
         return mView;
     }

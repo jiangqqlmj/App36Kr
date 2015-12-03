@@ -4,6 +4,8 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/tv_title"
+        android:textColor="@color/color_black"
         android:text="第一个Fragment..."
         android:layout_gravity="center"
         android:layout_width="wrap_content"

@@ -11,8 +11,8 @@
         android:layout_height="49dp">
         <ImageView
             android:id="@+id/top_bar_icon"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:scaleType="fitXY"
@@ -37,12 +37,5 @@
             android:layout_marginRight="8dp"
             android:background="@drawable/btn_serach_selector"/>
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="1px"
-            android:layout_alignParentBottom="true"
-            android:background="#EEEEEE"
-            android:scaleType="fitXY"
-             />
  </RelativeLayout>
 </RelativeLayout>

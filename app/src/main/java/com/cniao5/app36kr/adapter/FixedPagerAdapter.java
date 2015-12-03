@@ -58,11 +58,11 @@ public class FixedPagerAdapter extends FragmentStatePagerAdapter {
 
     }
 
-//    @Override
-//    public CharSequence getPageTitle(int position)
-//    {
-//        return titles[position % titles.length];
-//    }
+    @Override
+    public CharSequence getPageTitle(int position)
+    {
+        return titles[position % titles.length];
+    }
 
     public List<Fragment> getFragments() {
         return fragments;

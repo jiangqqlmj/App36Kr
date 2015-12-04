@@ -22,14 +22,27 @@ import org.w3c.dom.Text;
  */
 public class OneFragment  extends Fragment {
     private View mView;
+    public static final String ARG_PAGE = "extra";
+    private String extra;
+    public static OneFragment newInstance(String extra) {
+        Bundle args = new Bundle();
+        args.putString(ARG_PAGE, extra);
+        OneFragment pageFragment = new OneFragment();
+        pageFragment.setArguments(args);
+        return pageFragment;
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        extra = getArguments().getString(ARG_PAGE);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(mView==null){
             mView=inflater.inflate(R.layout.one_frag_layout,container,false);
             TextView tv_title=(TextView)mView.findViewById(R.id.tv_title);
-            Bundle bundle=getArguments();
-            if(bundle!=null){
-                tv_title.setText(bundle.getString("extra"));
+            if(extra!=null){
+                tv_title.setText(extra);
             }
         }
         return mView;

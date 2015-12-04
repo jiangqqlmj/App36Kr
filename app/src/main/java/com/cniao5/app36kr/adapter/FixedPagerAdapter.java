@@ -32,7 +32,6 @@ public class FixedPagerAdapter extends FragmentStatePagerAdapter {
         super(fm);
 
     }
-
     @Override
     public Fragment getItem(int position) {
         return this.fragments.get(position);

@@ -48,10 +48,7 @@ public class TabInfoFragment  extends BaseFragment implements ViewPager.OnPageCh
     private void initValidata(){
         fragments=new ArrayList<>();
         for(int i=0;i<12;i++){
-            OneFragment oneFragment=new OneFragment();
-            Bundle bundle=new Bundle();
-            bundle.putString("extra",titles[i]);
-            oneFragment.setArguments(bundle);
+            OneFragment oneFragment=OneFragment.newInstance(titles[i]);
             fragments.add(oneFragment);
         }
         //创建Fragment的 ViewPager 自定义适配器

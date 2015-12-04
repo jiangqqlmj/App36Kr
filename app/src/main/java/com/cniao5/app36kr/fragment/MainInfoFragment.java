@@ -13,14 +13,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.chinaztt.fda.viewpagerindicator.TabPageIndicator;
 import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.adapter.FixedPagerAdapter;
 import com.cniao5.app36kr.application.CNKApplication;
 import com.cniao5.app36kr.fragment.base.BaseFragment;
 import com.cniao5.app36kr.ui.MainActivity;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,19 +104,9 @@ public class MainInfoFragment extends BaseFragment implements ViewPager.OnPageCh
     }
     public void initDatas(){
         fragments=new ArrayList<>();
-        fragments.add(new OneFragment());
-        fragments.add(new TwoFragment());
-        fragments.add(new ThreeFragment());
-        fragments.add(new FourFragment());
-        fragments.add(new OneFragment());
-        fragments.add(new TwoFragment());
-        fragments.add(new ThreeFragment());
-        fragments.add(new FourFragment());
-        fragments.add(new OneFragment());
-        fragments.add(new TwoFragment());
-        fragments.add(new ThreeFragment());
-        fragments.add(new FourFragment());
-
+        for(int i=0;i<12;i++){
+            fragments.add(new PageFragment());
+        }
         mPagerAdater=new FixedPagerAdapter(getChildFragmentManager());
         //mPagerAdater.setTitles(titles);
         mPagerAdater.setFragments(fragments);

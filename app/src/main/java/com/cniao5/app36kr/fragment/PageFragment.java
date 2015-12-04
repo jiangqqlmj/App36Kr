@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cniao5.app36kr.R;
-
-import org.w3c.dom.Text;
+import com.cniao5.app36kr.fragment.base.BaseFragment;
 
 /**
  * 当前类注释:第一个Fragment
@@ -20,14 +19,14 @@ import org.w3c.dom.Text;
  * QQ： 781931404
  * 公司：江苏中天科技软件技术有限公司
  */
-public class OneFragment  extends Fragment {
+public class PageFragment extends BaseFragment {
     private View mView;
     public static final String ARG_PAGE = "extra";
     private String extra;
-    public static OneFragment newInstance(String extra) {
+    public static PageFragment newInstance(String extra) {
         Bundle args = new Bundle();
         args.putString(ARG_PAGE, extra);
-        OneFragment pageFragment = new OneFragment();
+        PageFragment pageFragment = new PageFragment();
         pageFragment.setArguments(args);
         return pageFragment;
     }

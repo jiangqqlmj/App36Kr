@@ -18,11 +18,6 @@ import java.util.List;
  */
 public class FixedPagerAdapter extends FragmentStatePagerAdapter {
     private String[] titles;
-
-    public String[] getTitles() {
-        return titles;
-    }
-
     public void setTitles(String[] titles) {
         this.titles = titles;
     }
@@ -51,21 +46,15 @@ public class FixedPagerAdapter extends FragmentStatePagerAdapter {
         }
         return fragment;
     }
-
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-
     }
-
     @Override
     public CharSequence getPageTitle(int position)
     {
         return titles[position % titles.length];
     }
 
-    public List<Fragment> getFragments() {
-        return fragments;
-    }
     public void setFragments(List<Fragment> fragments) {
         this.fragments = fragments;
     }

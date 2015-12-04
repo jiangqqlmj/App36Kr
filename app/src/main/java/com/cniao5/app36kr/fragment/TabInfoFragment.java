@@ -43,13 +43,12 @@ public class TabInfoFragment  extends BaseFragment implements ViewPager.OnPageCh
     private void initViews(){
         tab_layout=(TabLayout)mView.findViewById(R.id.tab_layout);
         info_viewpager=(ViewPager)mView.findViewById(R.id.info_viewpager);
-
     }
     private void initValidata(){
         fragments=new ArrayList<>();
         for(int i=0;i<12;i++){
-            OneFragment oneFragment=OneFragment.newInstance(titles[i]);
-            fragments.add(oneFragment);
+            PageFragment pageFragment = PageFragment.newInstance(titles[i]);
+            fragments.add(pageFragment);
         }
         //创建Fragment的 ViewPager 自定义适配器
         mPagerAdater=new FixedPagerAdapter(getChildFragmentManager());

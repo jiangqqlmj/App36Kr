@@ -1,7 +1,6 @@
 package com.cniao5.app36kr.application;
 
 import android.app.Application;
-import android.graphics.Bitmap;
 import android.os.Environment;
 
 import com.cniao5.app36kr.R;
@@ -13,7 +12,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
-import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import java.io.File;
 

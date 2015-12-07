@@ -7,6 +7,9 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:cacheColorHint="@color/color_transparent"
+        android:divider="@drawable/bottom_line_gray"
+        android:dividerHeight="2dp"
+        android:listSelector="@drawable/lv_item_selector"
         android:scrollbars="none"/>
 
 </LinearLayout>

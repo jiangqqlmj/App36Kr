@@ -12,7 +12,7 @@
         <com.cniao5.app36kr.widget.AutoGallery
             android:id="@+id/headline_image_gallery"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="170dip"
             android:fadingEdge="none"
             android:fadingEdgeLength="0dp"
             android:soundEffectsEnabled="false" />

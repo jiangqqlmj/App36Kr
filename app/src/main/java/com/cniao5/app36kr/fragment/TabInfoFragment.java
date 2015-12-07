@@ -69,12 +69,9 @@ public class TabInfoFragment  extends BaseFragment implements ViewPager.OnPageCh
         info_viewpager.setAdapter(mPagerAdater);
         info_viewpager.setOnPageChangeListener(this);
         tab_layout.setupWithViewPager(info_viewpager);
-
-
         //设置Tablayout
         //设置TabLayout模式 -该使用Tab数量比较多的情况
         tab_layout.setTabMode(TabLayout.MODE_SCROLLABLE);
-
     }
 
     @Override

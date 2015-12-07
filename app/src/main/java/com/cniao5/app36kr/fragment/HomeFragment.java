@@ -122,9 +122,7 @@ public class HomeFragment extends BaseFragment implements DefineView{
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-
             }
-
             @Override
             public void onResponse(Response response) throws IOException {
                  Document document=Jsoup.parse(response.body().byteStream(), "UTF-8", Config.CRAWLER_URL);

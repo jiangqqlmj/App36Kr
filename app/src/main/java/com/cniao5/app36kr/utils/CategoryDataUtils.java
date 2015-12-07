@@ -27,7 +27,7 @@ public class CategoryDataUtils {
         beans.add(new CategoriesBean("互联网金融","http://www.36kr.com/columns/finance","finance"));
         beans.add(new CategoriesBean("大公司","http://www.36kr.com/columns/company","company"));
         beans.add(new CategoriesBean("专栏","http://www.36kr.com/columns/column","column"));
-        beans.add(new CategoriesBean("新产品","http://www.36kr.com/product_notes","pdn"));
+        //beans.add(new CategoriesBean("新产品","http://www.36kr.com/product_notes","pdn"));
         return beans;
     }
 }

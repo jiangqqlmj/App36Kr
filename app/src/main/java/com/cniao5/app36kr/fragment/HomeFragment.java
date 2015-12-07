@@ -10,12 +10,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.adapter.quick.BaseAdapterHelper;
 import com.cniao5.app36kr.adapter.quick.QuickAdapter;
-import com.cniao5.app36kr.biz.CategoryDataManager;
 import com.cniao5.app36kr.biz.HeadDataManager;
 import com.cniao5.app36kr.biz.HomeNewsDataManager;
 import com.cniao5.app36kr.common.Config;
@@ -27,16 +25,13 @@ import com.cniao5.app36kr.fragment.base.BaseFragment;
 import com.cniao5.app36kr.widget.AutoGallery;
 import com.cniao5.app36kr.widget.FlowIndicator;
 import com.cniao5.app36kr.widget.PullToRefreshListView;
-import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.List;
@@ -51,13 +46,6 @@ import java.util.concurrent.TimeUnit;
  * 打造极致课程，是菜鸟窝不变的承诺
  */
 public class HomeFragment extends BaseFragment implements DefineView{
-    private static OkHttpClient client=null;
-    static {
-        client=new OkHttpClient();
-        client.setConnectTimeout(10, TimeUnit.SECONDS);
-        client.setReadTimeout(30, TimeUnit.SECONDS);
-        client.setWriteTimeout(30,TimeUnit.SECONDS);
-    }
     private  int[] mask_colors;
     private Resources res;
     private Request request;

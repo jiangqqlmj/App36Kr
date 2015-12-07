@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <android.support.v7.widget.CardView
+        android:id="@+id/item_tv_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        app:cardCornerRadius="1dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        app:cardElevation="4dp"
+        app:cardMaxElevation="4dp"
+        >
+        <ImageView
+            android:id="@+id/item_tv_img"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/item_logo"
+             />
+        <TextView
+            android:id="@+id/item_tv_title"
+            android:layout_marginBottom="4dp"
+            android:textSize="16sp"
+            android:layout_width="fill_parent"
+            android:minLines="2"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="[氪TV测评]Surface pro 4上手体验"
+            android:textColor="@color/color_white"
+            android:gravity="center_horizontal|bottom"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/icon_krtv"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <!--类型标签-->
+        <TextView
+            android:id="@+id/item_tv_mask"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
+            android:textSize="12sp"
+            android:textColor="@color/color_white"
+            android:background="@color/mask_tags_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"/>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

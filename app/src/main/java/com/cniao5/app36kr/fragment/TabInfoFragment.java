@@ -49,7 +49,7 @@ public class TabInfoFragment  extends BaseFragment implements ViewPager.OnPageCh
     }
     private void initValidata(){
         fragments=new ArrayList<>();
-        for(int i=0;i<12;i++){
+        for(int i=0;i<categoriesBeans.size();i++){
             BaseFragment fragment=null;
             if(i==0){
                 //首页

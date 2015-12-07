@@ -17,5 +17,5 @@
         </activity>
         <activity android:name=".ui.MainActivity" android:theme="@style/App_Theme"/>
     </application>
-
+   <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

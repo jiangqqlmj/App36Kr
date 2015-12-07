@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 
 import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.adapter.FixedPagerAdapter;
+import com.cniao5.app36kr.entity.CategoriesBean;
 import com.cniao5.app36kr.fragment.base.BaseFragment;
 import com.cniao5.app36kr.ui.MainActivity;
+import com.cniao5.app36kr.utils.CategoryDataUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,8 @@ import java.util.List;
  * 打造极致课程，是菜鸟窝不变的承诺
  */
 public class TabInfoFragment  extends BaseFragment implements ViewPager.OnPageChangeListener{
-    private String[] titles=new String[]{"全部","氪TV","O2O","新硬件","Fun!!","企业服务","Fit&Health","在线教育","互联网金融","大公司","专栏","新产品"};
+    //初始化分类分类Tab信息
+    private static List<CategoriesBean> categoriesBeans= CategoryDataUtils.getCategoryBeans();
     private View mView;
     private TabLayout tab_layout;
     private ViewPager info_viewpager;
@@ -47,13 +50,19 @@ public class TabInfoFragment  extends BaseFragment implements ViewPager.OnPageCh
     private void initValidata(){
         fragments=new ArrayList<>();
         for(int i=0;i<12;i++){
-            PageFragment pageFragment = PageFragment.newInstance(titles[i]);
-            fragments.add(pageFragment);
+            BaseFragment fragment=null;
+            if(i==0){
+                //首页
+                fragment= HomeFragment.newInstance(categoriesBeans.get(i));
+            }else{
+                fragment= PageFragment.newInstance(categoriesBeans.get(i));
+            }
+            fragments.add(fragment);
         }
         //创建Fragment的 ViewPager 自定义适配器
         mPagerAdater=new FixedPagerAdapter(getChildFragmentManager());
         //设置显示的标题
-        mPagerAdater.setTitles(titles);
+        mPagerAdater.setCategoriesBeans(categoriesBeans);
         //设置需要进行滑动的页面Fragment
         mPagerAdater.setFragments(fragments);
 

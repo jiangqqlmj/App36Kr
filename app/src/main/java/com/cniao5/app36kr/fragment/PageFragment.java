@@ -18,9 +18,11 @@ import com.cniao5.app36kr.biz.HeadDataManager;
 import com.cniao5.app36kr.biz.HomeNewsDataManager;
 import com.cniao5.app36kr.common.Config;
 import com.cniao5.app36kr.common.DefineView;
+import com.cniao5.app36kr.common.RequestURL;
 import com.cniao5.app36kr.entity.CategoriesBean;
 import com.cniao5.app36kr.entity.HomeNewsBean;
 import com.cniao5.app36kr.fragment.base.BaseFragment;
+import com.cniao5.app36kr.utils.PathUtils;
 import com.cniao5.app36kr.widget.NewsDecoration;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
@@ -30,7 +32,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 当前类注释:
@@ -55,6 +59,10 @@ public class PageFragment extends BaseFragment implements DefineView{
     private LinearLayout loading;
     private LinearLayout empty;
     private LinearLayout error;
+
+    //进行分页效果--主要用于近期活动列表
+    private int page=1;      //页码 默认为第一页
+    private int pageSize=20;   //每页的item数量
 
     public static PageFragment newInstance(CategoriesBean extra) {
         Bundle args = new Bundle();
@@ -101,35 +109,48 @@ public class PageFragment extends BaseFragment implements DefineView{
 
         linearLayoutManager=new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
-        if(extraBean.getData_type().equals("tv")){
-              adapter=new HomeRecyclerAdapter(getActivity(),0);
-        }else {
-              adapter=new HomeRecyclerAdapter(getActivity(),1);
+        if(extraBean.getData_type().equals("tv")) {
+            adapter = new HomeRecyclerAdapter(getActivity(), 0);
+        }else if(extraBean.getData_type().equals("")){
+            //近期活动
+            adapter = new HomeRecyclerAdapter(getActivity(), 2);
+        }else{
+            adapter=new HomeRecyclerAdapter(getActivity(),1);
         }
         //设置固定大小
         home_recyclerview.setHasFixedSize(true);
         home_recyclerview.setLayoutManager(linearLayoutManager);
         home_recyclerview.addItemDecoration(new NewsDecoration(getActivity(),OrientationHelper.VERTICAL));
         //进行获取头部广告数据和底部列表数据
-        request=new Request.Builder().url(extraBean.getHref()).build();
+        if(!extraBean.getData_type().equals("recent")) {
+            request=new Request.Builder().url(extraBean.getHref()).build();
+        }else{
+            Map<String,String> params=new HashMap<String,String>();
+            params.put("page",String.valueOf(page));
+            params.put("pageSize", String.valueOf(pageSize));
+            String url=PathUtils.getRequestPath(RequestURL.RECENT_URL,params);
+            request=new Request.Builder().url(url).build();
+        }
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
             }
             @Override
             public void onResponse(Response response) throws IOException {
-                Document document= Jsoup.parse(response.body().byteStream(), "UTF-8", Config.CRAWLER_URL);
-                homeNewsBeans=new HomeNewsDataManager().getHomeNewsBeans(document);
-                if(homeNewsBeans!=null){
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            bindData();
-                            Log.d("zttjiangqq", homeNewsBeans.toString());
-                        }
-                    });
+                if (!extraBean.getData_type().equals("recent")) {
+                    Document document = Jsoup.parse(response.body().byteStream(), "UTF-8", Config.CRAWLER_URL);
+                    homeNewsBeans = new HomeNewsDataManager().getHomeNewsBeans(document);
+                    if (homeNewsBeans != null) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                bindData();
+                            }
+                        });
+                    }
+                }else {
+                    Log.d("zttjiangqq", response.body().string());
                 }
-
             }
         });
     }

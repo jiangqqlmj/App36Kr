@@ -14,9 +14,6 @@ import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.entity.HomeNewsBean;
 import com.cniao5.app36kr.widget.RoundAngleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 /**

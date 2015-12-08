@@ -18,6 +18,7 @@ public class CategoryDataUtils {
         List<CategoriesBean> beans=new ArrayList<CategoriesBean>();
         beans.add(new CategoriesBean("全部","http://www.36kr.com/","全部"));
         beans.add(new CategoriesBean("氪TV","http://www.36kr.com/columns/tv","tv"));
+        beans.add(new CategoriesBean("近期活动","http://www.36kr.com/columns/o2o","recent"));
         beans.add(new CategoriesBean("O2O","http://www.36kr.com/columns/o2o","o2o"));
         beans.add(new CategoriesBean("新硬件","http://www.36kr.com/columns/hardware","hardware"));
         beans.add(new CategoriesBean("Fun!!","http://www.36kr.com/columns/fun","fun"));

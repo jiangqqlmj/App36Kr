@@ -9,4 +9,7 @@ package com.cniao5.app36kr.common;
  * 打造极致课程，是菜鸟窝不变的承诺
  */
 public class RequestURL {
+    //?page=3&pageSize=12 近期活动接口
+    public static final String RECENT_URL="http://chuang.36kr.com/api/actapply";
+
 }

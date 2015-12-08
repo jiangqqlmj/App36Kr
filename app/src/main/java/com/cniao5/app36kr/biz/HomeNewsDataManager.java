@@ -30,6 +30,10 @@ public class HomeNewsDataManager {
 	  List<HomeNewsBean> homeNewsBeans=new ArrayList<HomeNewsBean>();
 	  Elements elements= document.select("div.articles").first().select("article");
 	  for (Element element : elements) {
+		  //151208日 22:10添加 过滤置顶数据
+		  if(element.hasClass("article-Top")){
+			  continue;
+		  }
 		  //图标以及文章类型
 		  Element a_pic_element=element.select("a.pic").first();
 		  String imgurl="";

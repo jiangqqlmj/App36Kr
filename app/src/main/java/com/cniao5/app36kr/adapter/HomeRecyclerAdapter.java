@@ -14,6 +14,9 @@ import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.entity.HomeNewsBean;
 import com.cniao5.app36kr.widget.RoundAngleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -27,6 +30,7 @@ import java.util.List;
 public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private static final int TYPE_ITEM = 0;     //普通Item View
     private static final int TYPE_TV = 1;       //TV列表
+    private static final int TYPE_RECENT = 2;       //近期活动列表
     private static final int TYPE_FOOTER = 2;   //顶部FootView
 
     //界面类型  TV页面或者普通列表  0表示TV ,1表示列表
@@ -60,13 +64,15 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return homeNewsBeans!=null?homeNewsBeans.size()+1:0;
+        if(type==2){
+            return 60;
+        }else {
+            return homeNewsBeans != null ? homeNewsBeans.size() + 1 : 0;
+        }
     }
-
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //进行判断TV还是普通列表，来创建返回不同的View
+        //进行判断TV还是普通列表,近期活动，来创建返回不同的View
         if(type==0){
             if(viewType==TYPE_TV){
                 View view=mInflater.inflate(R.layout.item_tv_news_layout,parent,false);
@@ -75,10 +81,19 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 View foot_view=mInflater.inflate(R.layout.recycler_load_more_layout,parent,false);
                 return new FootViewHolder(foot_view);
             }
-        }else {
+        }else if(type==1){
             if(viewType==TYPE_ITEM){
                 View view=mInflater.inflate(R.layout.item_home_news_layout,parent,false);
                 return new ItemViewHolder(view);
+            }else if(viewType==TYPE_FOOTER){
+                View foot_view=mInflater.inflate(R.layout.recycler_load_more_layout,parent,false);
+                return new FootViewHolder(foot_view);
+            }
+        }else if(type==2){
+            //近期活动
+            if(viewType==TYPE_RECENT){
+                View view=mInflater.inflate(R.layout.item_recent_news_layout,parent,false);
+                return new RecentViewHolder(view);
             }else if(viewType==TYPE_FOOTER){
                 View foot_view=mInflater.inflate(R.layout.recycler_load_more_layout,parent,false);
                 return new FootViewHolder(foot_view);
@@ -112,7 +127,11 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                ((TvItemViewHolder) holder).item_tv_title.setText(bean.getTitle());
                //分类标签视图
                ((TvItemViewHolder) holder).item_tv_mask.setText(bean.getMask());
-           }else if(holder instanceof FootViewHolder){
+           }else if(holder instanceof RecentViewHolder){
+               //近期活动
+
+           }
+           else if(holder instanceof FootViewHolder){
            }
     }
 
@@ -128,6 +147,12 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                      return TYPE_FOOTER;
                  } else {
                      return TYPE_TV;
+             }
+         }else if(type==2){
+             if (position + 1 == getItemCount()) {
+                 return TYPE_FOOTER;
+             } else {
+                 return TYPE_RECENT;
              }
          }else{
              if (position + 1 == getItemCount()) {
@@ -173,6 +198,25 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             item_tv_img=(ImageView)view.findViewById(R.id.item_tv_img);
             item_tv_title=(TextView)view.findViewById(R.id.item_tv_title);
             item_tv_mask=(TextView)view.findViewById(R.id.item_tv_mask);
+        }
+    }
+
+    /**
+     * 近期活动列表 ViewHolder
+     */
+    public static class RecentViewHolder extends  RecyclerView.ViewHolder{
+        ImageView recent_item_img_logo;
+        TextView recent_item_tv_title;
+        TextView recent_item_tv_location;
+        TextView recent_item_tv_status;
+        TextView recent_item_tv_timetext;
+        public RecentViewHolder(View itemView) {
+            super(itemView);
+            recent_item_img_logo=(ImageView)itemView.findViewById(R.id.recent_item_img_logo);
+            recent_item_tv_title=(TextView)itemView.findViewById(R.id.recent_item_tv_title);
+            recent_item_tv_location=(TextView)itemView.findViewById(R.id.recent_item_tv_location);
+            recent_item_tv_status=(TextView)itemView.findViewById(R.id.recent_item_tv_status);
+            recent_item_tv_timetext=(TextView)itemView.findViewById(R.id.recent_item_tv_timetext);
         }
     }
 

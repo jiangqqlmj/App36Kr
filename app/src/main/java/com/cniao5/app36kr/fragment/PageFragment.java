@@ -111,7 +111,7 @@ public class PageFragment extends BaseFragment implements DefineView{
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         if(extraBean.getData_type().equals("tv")) {
             adapter = new HomeRecyclerAdapter(getActivity(), 0);
-        }else if(extraBean.getData_type().equals("")){
+        }else if(extraBean.getData_type().equals("recent")){
             //近期活动
             adapter = new HomeRecyclerAdapter(getActivity(), 2);
         }else{
@@ -150,6 +150,17 @@ public class PageFragment extends BaseFragment implements DefineView{
                     }
                 }else {
                     Log.d("zttjiangqq", response.body().string());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            home_recyclerview.setVisibility(View.VISIBLE);
+                            prompt_framelayout.setVisibility(View.GONE);
+                            loading.setVisibility(View.GONE);
+                            empty.setVisibility(View.GONE);
+                            error.setVisibility(View.GONE);
+                            home_recyclerview.setAdapter(adapter);
+                        }
+                    });
                 }
             }
         });

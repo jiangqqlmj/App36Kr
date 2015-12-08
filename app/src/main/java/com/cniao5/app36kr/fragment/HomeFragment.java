@@ -65,7 +65,7 @@ public class HomeFragment extends BaseFragment implements DefineView{
     private ImageLoader mImageLoder;
 
     //加载promt 提醒的布局相关
-    private FrameLayout promt_framelayout;
+    private FrameLayout prompt_framelayout;
     private LinearLayout loading;
     private LinearLayout empty;
     private LinearLayout error;
@@ -102,9 +102,9 @@ public class HomeFragment extends BaseFragment implements DefineView{
         headline_image_gallery=(AutoGallery)headView.findViewById(R.id.headline_image_gallery);
         galleryFlowIndicator=(FlowIndicator)headView.findViewById(R.id.headline_circle_indicator);
 
-        promt_framelayout=(FrameLayout)mView.findViewById(R.id.promt_framelayout);
+        prompt_framelayout=(FrameLayout)mView.findViewById(R.id.prompt_framelayout);
         loading=(LinearLayout)mView.findViewById(R.id.loading);
-        empty=(LinearLayout)mView.findViewById(R.id.loading);
+        empty=(LinearLayout)mView.findViewById(R.id.empty);
         error=(LinearLayout)mView.findViewById(R.id.error);
 
     }
@@ -112,14 +112,13 @@ public class HomeFragment extends BaseFragment implements DefineView{
     public void initValidata() {
         //设置控件显示状态
         lv_pulltorefresh.setVisibility(View.GONE);
-        promt_framelayout.setVisibility(View.VISIBLE);
+        prompt_framelayout.setVisibility(View.VISIBLE);
         loading.setVisibility(View.VISIBLE);
         empty.setVisibility(View.GONE);
         error.setVisibility(View.GONE);
 
         mImageLoder=ImageLoader.getInstance();
-        mask_colors=new int[]{R.color.mask_tags_1,R.color.mask_tags_2
-                ,R.color.mask_tags_3,R.color.mask_tags_4,R.color.mask_tags_5,R.color.mask_tags_6
+        mask_colors=new int[]{R.color.mask_tags_1,R.color.mask_tags_2,R.color.mask_tags_3,R.color.mask_tags_4,R.color.mask_tags_5,R.color.mask_tags_6
                 ,R.color.mask_tags_7,R.color.mask_tags_8,R.color.mask_tags_9,R.color.mask_tags_10
                 ,R.color.mask_tags_11,R.color.mask_tags_12};
         res=getActivity().getResources();
@@ -201,7 +200,7 @@ public class HomeFragment extends BaseFragment implements DefineView{
         if(homeNewsBeans!=null){
             //设置控件显示状态
             lv_pulltorefresh.setVisibility(View.VISIBLE);
-            promt_framelayout.setVisibility(View.GONE);
+            prompt_framelayout.setVisibility(View.GONE);
             loading.setVisibility(View.GONE);
             empty.setVisibility(View.GONE);
             error.setVisibility(View.GONE);
@@ -269,10 +268,9 @@ public class HomeFragment extends BaseFragment implements DefineView{
                 };
                 lv_pulltorefresh.setAdapter(mAdapter);
          }
-
         }else {
             lv_pulltorefresh.setVisibility(View.GONE);
-            promt_framelayout.setVisibility(View.VISIBLE);
+            prompt_framelayout.setVisibility(View.VISIBLE);
             loading.setVisibility(View.GONE);
             empty.setVisibility(View.VISIBLE);
             error.setVisibility(View.GONE);

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    >
     <com.cniao5.app36kr.widget.PullToRefreshListView
+        android:visibility="gone"
         android:id="@+id/lv_pulltorefresh"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -12,12 +15,13 @@
         android:listSelector="@drawable/lv_item_selector"
         android:scrollbars="none"/>
     <FrameLayout
+        android:id="@+id/prompt_framelayout"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/promt_framelayout">
-        <include layout="@layout/loading"/>
+        >
+        <include layout="@layout/loading" />
         <include layout="@layout/empty"/>
         <include layout="@layout/error"/>
-
     </FrameLayout>
 </RelativeLayout>

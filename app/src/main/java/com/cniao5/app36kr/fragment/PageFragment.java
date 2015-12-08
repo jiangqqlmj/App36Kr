@@ -51,7 +51,7 @@ public class PageFragment extends BaseFragment implements DefineView{
     private HomeRecyclerAdapter adapter;
 
     //加载promt 提醒的布局相关
-    private FrameLayout promt_framelayout;
+    private FrameLayout prompt_framelayout;
     private LinearLayout loading;
     private LinearLayout empty;
     private LinearLayout error;
@@ -83,9 +83,9 @@ public class PageFragment extends BaseFragment implements DefineView{
     public void initView() {
         home_recyclerview=(RecyclerView)mView.findViewById(R.id.home_recyclerview);
 
-        promt_framelayout=(FrameLayout)mView.findViewById(R.id.promt_framelayout);
+        prompt_framelayout=(FrameLayout)mView.findViewById(R.id.prompt_framelayout);
         loading=(LinearLayout)mView.findViewById(R.id.loading);
-        empty=(LinearLayout)mView.findViewById(R.id.loading);
+        empty=(LinearLayout)mView.findViewById(R.id.empty);
         error=(LinearLayout)mView.findViewById(R.id.error);
     }
 
@@ -94,7 +94,7 @@ public class PageFragment extends BaseFragment implements DefineView{
 
         //设置控件显示状态
         home_recyclerview.setVisibility(View.GONE);
-        promt_framelayout.setVisibility(View.VISIBLE);
+        prompt_framelayout.setVisibility(View.VISIBLE);
         loading.setVisibility(View.VISIBLE);
         empty.setVisibility(View.GONE);
         error.setVisibility(View.GONE);
@@ -144,7 +144,7 @@ public class PageFragment extends BaseFragment implements DefineView{
         if(homeNewsBeans!=null){
             //设置控件显示状态
             home_recyclerview.setVisibility(View.VISIBLE);
-            promt_framelayout.setVisibility(View.GONE);
+            prompt_framelayout.setVisibility(View.GONE);
             loading.setVisibility(View.GONE);
             empty.setVisibility(View.GONE);
             error.setVisibility(View.GONE);
@@ -152,7 +152,7 @@ public class PageFragment extends BaseFragment implements DefineView{
             home_recyclerview.setAdapter(adapter);
         }else {
             home_recyclerview.setVisibility(View.GONE);
-            promt_framelayout.setVisibility(View.VISIBLE);
+            prompt_framelayout.setVisibility(View.VISIBLE);
             loading.setVisibility(View.GONE);
             empty.setVisibility(View.VISIBLE);
             error.setVisibility(View.GONE);

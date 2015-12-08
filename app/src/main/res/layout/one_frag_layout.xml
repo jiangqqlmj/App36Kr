@@ -7,15 +7,14 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scrollbars="none"
-        android:background="@color/color_white"
         ></android.support.v7.widget.RecyclerView>
     <FrameLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/promt_framelayout">
+        android:id="@+id/prompt_framelayout">
         <include layout="@layout/loading"/>
         <include layout="@layout/empty"/>
         <include layout="@layout/error"/>
-
     </FrameLayout>
 </RelativeLayout>

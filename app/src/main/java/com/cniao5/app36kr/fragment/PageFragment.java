@@ -16,11 +16,13 @@ import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.adapter.HomeRecyclerAdapter;
 import com.cniao5.app36kr.biz.HeadDataManager;
 import com.cniao5.app36kr.biz.HomeNewsDataManager;
+import com.cniao5.app36kr.biz.RecentDataManager;
 import com.cniao5.app36kr.common.Config;
 import com.cniao5.app36kr.common.DefineView;
 import com.cniao5.app36kr.common.RequestURL;
 import com.cniao5.app36kr.entity.CategoriesBean;
 import com.cniao5.app36kr.entity.HomeNewsBean;
+import com.cniao5.app36kr.entity.RecentNewsBean;
 import com.cniao5.app36kr.fragment.base.BaseFragment;
 import com.cniao5.app36kr.utils.PathUtils;
 import com.cniao5.app36kr.widget.NewsDecoration;
@@ -50,6 +52,7 @@ public class PageFragment extends BaseFragment implements DefineView{
     public static final String ARG_PAGE = "extra";
     private CategoriesBean extraBean;
     private List<HomeNewsBean> homeNewsBeans;   //新闻列表数据
+    private List<RecentNewsBean> recentNewsBeans;  //近期活动列表数据
     private RecyclerView home_recyclerview;
     private LinearLayoutManager linearLayoutManager;
     private HomeRecyclerAdapter adapter;
@@ -149,16 +152,12 @@ public class PageFragment extends BaseFragment implements DefineView{
                         });
                     }
                 }else {
-                    Log.d("zttjiangqq", response.body().string());
+                    recentNewsBeans = RecentDataManager.getRecentDatas(response.body().string());
+                    Log.d("zttjiangqq", recentNewsBeans.toString());
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            home_recyclerview.setVisibility(View.VISIBLE);
-                            prompt_framelayout.setVisibility(View.GONE);
-                            loading.setVisibility(View.GONE);
-                            empty.setVisibility(View.GONE);
-                            error.setVisibility(View.GONE);
-                            home_recyclerview.setAdapter(adapter);
+                            bindData();
                         }
                     });
                 }
@@ -173,22 +172,42 @@ public class PageFragment extends BaseFragment implements DefineView{
 
     @Override
     public void bindData() {
-        if(homeNewsBeans!=null){
-            //设置控件显示状态
-            home_recyclerview.setVisibility(View.VISIBLE);
-            prompt_framelayout.setVisibility(View.GONE);
-            loading.setVisibility(View.GONE);
-            empty.setVisibility(View.GONE);
-            error.setVisibility(View.GONE);
-            adapter.setHomeNewsBeans(homeNewsBeans);
-            home_recyclerview.setAdapter(adapter);
-        }else {
-            home_recyclerview.setVisibility(View.GONE);
-            prompt_framelayout.setVisibility(View.VISIBLE);
-            loading.setVisibility(View.GONE);
-            empty.setVisibility(View.VISIBLE);
-            error.setVisibility(View.GONE);
+        if(!extraBean.getData_type().equals("recent")) {
+            if (homeNewsBeans != null) {
+                //设置控件显示状态
+                home_recyclerview.setVisibility(View.VISIBLE);
+                prompt_framelayout.setVisibility(View.GONE);
+                loading.setVisibility(View.GONE);
+                empty.setVisibility(View.GONE);
+                error.setVisibility(View.GONE);
+                adapter.setHomeNewsBeans(homeNewsBeans);
+                home_recyclerview.setAdapter(adapter);
+            } else {
+                setEmptyView();
+            }
+        }else{
+            if(recentNewsBeans!=null) {
+                home_recyclerview.setVisibility(View.VISIBLE);
+                prompt_framelayout.setVisibility(View.GONE);
+                loading.setVisibility(View.GONE);
+                empty.setVisibility(View.GONE);
+                error.setVisibility(View.GONE);
+                adapter.setRecentNewsBeans(recentNewsBeans);
+                home_recyclerview.setAdapter(adapter);
+            }else {
+                setEmptyView();
+            }
         }
+    }
 
+    /**
+     * 进行设置数据暂时为空  提示语
+     */
+    private void setEmptyView(){
+        home_recyclerview.setVisibility(View.GONE);
+        prompt_framelayout.setVisibility(View.VISIBLE);
+        loading.setVisibility(View.GONE);
+        empty.setVisibility(View.VISIBLE);
+        error.setVisibility(View.GONE);
     }
 }

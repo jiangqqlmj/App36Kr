@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.entity.HomeNewsBean;
+import com.cniao5.app36kr.entity.RecentNewsBean;
 import com.cniao5.app36kr.widget.RoundAngleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -40,11 +41,16 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private LayoutInflater mInflater;
     //新闻列表信息
     private List<HomeNewsBean> homeNewsBeans;
+    //近期活动相关信息
+    private List<RecentNewsBean> recentNewsBeans;
     private ImageLoader mImageLoder;
     private int[] mask_colors;
     private String[] masks;
     private Resources res;
 
+    public void setRecentNewsBeans(List<RecentNewsBean> recentNewsBeans) {
+        this.recentNewsBeans = recentNewsBeans;
+    }
     public void setHomeNewsBeans(List<HomeNewsBean> homeNewsBeans) {
         this.homeNewsBeans = homeNewsBeans;
     }

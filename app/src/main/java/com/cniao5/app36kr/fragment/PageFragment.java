@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cniao5.app36kr.R;
@@ -47,6 +49,13 @@ public class PageFragment extends BaseFragment implements DefineView{
     private RecyclerView home_recyclerview;
     private LinearLayoutManager linearLayoutManager;
     private HomeRecyclerAdapter adapter;
+
+    //加载promt 提醒的布局相关
+    private FrameLayout promt_framelayout;
+    private LinearLayout loading;
+    private LinearLayout empty;
+    private LinearLayout error;
+
     public static PageFragment newInstance(CategoriesBean extra) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_PAGE, extra);
@@ -73,10 +82,23 @@ public class PageFragment extends BaseFragment implements DefineView{
     @Override
     public void initView() {
         home_recyclerview=(RecyclerView)mView.findViewById(R.id.home_recyclerview);
+
+        promt_framelayout=(FrameLayout)mView.findViewById(R.id.promt_framelayout);
+        loading=(LinearLayout)mView.findViewById(R.id.loading);
+        empty=(LinearLayout)mView.findViewById(R.id.loading);
+        error=(LinearLayout)mView.findViewById(R.id.error);
     }
 
     @Override
     public void initValidata() {
+
+        //设置控件显示状态
+        home_recyclerview.setVisibility(View.GONE);
+        promt_framelayout.setVisibility(View.VISIBLE);
+        loading.setVisibility(View.VISIBLE);
+        empty.setVisibility(View.GONE);
+        error.setVisibility(View.GONE);
+
         linearLayoutManager=new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         if(extraBean.getData_type().equals("tv")){
@@ -119,7 +141,22 @@ public class PageFragment extends BaseFragment implements DefineView{
 
     @Override
     public void bindData() {
-        adapter.setHomeNewsBeans(homeNewsBeans);
-        home_recyclerview.setAdapter(adapter);
+        if(homeNewsBeans!=null){
+            //设置控件显示状态
+            home_recyclerview.setVisibility(View.VISIBLE);
+            promt_framelayout.setVisibility(View.GONE);
+            loading.setVisibility(View.GONE);
+            empty.setVisibility(View.GONE);
+            error.setVisibility(View.GONE);
+            adapter.setHomeNewsBeans(homeNewsBeans);
+            home_recyclerview.setAdapter(adapter);
+        }else {
+            home_recyclerview.setVisibility(View.GONE);
+            promt_framelayout.setVisibility(View.VISIBLE);
+            loading.setVisibility(View.GONE);
+            empty.setVisibility(View.VISIBLE);
+            error.setVisibility(View.GONE);
+        }
+
     }
 }

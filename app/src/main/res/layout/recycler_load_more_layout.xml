@@ -13,6 +13,7 @@
             android:layout_height="25dp"
             />
         <TextView
+            android:textColor="@color/color_tab_title"
             android:id="@+id/foot_view_item_tv"
             android:layout_marginLeft="4dp"
             android:text="上拉加载更多..."

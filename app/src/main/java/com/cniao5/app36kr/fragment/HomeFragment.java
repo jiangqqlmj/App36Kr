@@ -2,14 +2,15 @@ package com.cniao5.app36kr.fragment;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.adapter.quick.BaseAdapterHelper;
@@ -32,10 +33,9 @@ import com.squareup.okhttp.Response;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 
 /**
  * 当前类注释:
@@ -63,6 +63,13 @@ public class HomeFragment extends BaseFragment implements DefineView{
     private int gallerySelectedPositon = 0; // 默认gallery的图片为第一张
     private QuickAdapter<HomeNewsBean> mAdapter;
     private ImageLoader mImageLoder;
+
+    //加载promt 提醒的布局相关
+    private FrameLayout promt_framelayout;
+    private LinearLayout loading;
+    private LinearLayout empty;
+    private LinearLayout error;
+
     public static HomeFragment newInstance(CategoriesBean extra) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_PAGE,extra);
@@ -84,7 +91,6 @@ public class HomeFragment extends BaseFragment implements DefineView{
             initView();
             initValidata();
             initListener();
-
         }
         return mView;
     }
@@ -96,9 +102,21 @@ public class HomeFragment extends BaseFragment implements DefineView{
         headline_image_gallery=(AutoGallery)headView.findViewById(R.id.headline_image_gallery);
         galleryFlowIndicator=(FlowIndicator)headView.findViewById(R.id.headline_circle_indicator);
 
+        promt_framelayout=(FrameLayout)mView.findViewById(R.id.promt_framelayout);
+        loading=(LinearLayout)mView.findViewById(R.id.loading);
+        empty=(LinearLayout)mView.findViewById(R.id.loading);
+        error=(LinearLayout)mView.findViewById(R.id.error);
+
     }
     @Override
     public void initValidata() {
+        //设置控件显示状态
+        lv_pulltorefresh.setVisibility(View.GONE);
+        promt_framelayout.setVisibility(View.VISIBLE);
+        loading.setVisibility(View.VISIBLE);
+        empty.setVisibility(View.GONE);
+        error.setVisibility(View.GONE);
+
         mImageLoder=ImageLoader.getInstance();
         mask_colors=new int[]{R.color.mask_tags_1,R.color.mask_tags_2
                 ,R.color.mask_tags_3,R.color.mask_tags_4,R.color.mask_tags_5,R.color.mask_tags_6
@@ -111,23 +129,26 @@ public class HomeFragment extends BaseFragment implements DefineView{
             @Override
             public void onFailure(Request request, IOException e) {
             }
+
             @Override
             public void onResponse(Response response) throws IOException {
-                 Document document=Jsoup.parse(response.body().byteStream(), "UTF-8", Config.CRAWLER_URL);
-                 adHeadBeans=new HeadDataManager().getHeadBeans(document);
-                 homeNewsBeans=new HomeNewsDataManager().getHomeNewsBeans(document);
-                 if(adHeadBeans!=null&&homeNewsBeans!=null){
-                  getActivity().runOnUiThread(new Runnable() {
-                     @Override
-                     public void run() {
-                         bindData();
-                         Log.d("zttjiangqq",homeNewsBeans.toString());
-                     }
-                 });
+                Document document = Jsoup.parse(response.body().byteStream(), "UTF-8", Config.CRAWLER_URL);
+                adHeadBeans = new HeadDataManager().getHeadBeans(document);
+                homeNewsBeans = new HomeNewsDataManager().getHomeNewsBeans(document);
+                if (adHeadBeans != null && homeNewsBeans != null) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            bindData();
+                            Log.d("zttjiangqq", homeNewsBeans.toString());
+                        }
+                    });
                 }
 
             }
         });
+
+
     }
 
     @Override
@@ -163,6 +184,7 @@ public class HomeFragment extends BaseFragment implements DefineView{
                                 .setSeletion(circleSelectedPosition);
 
                     }
+
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
 
@@ -176,70 +198,84 @@ public class HomeFragment extends BaseFragment implements DefineView{
                         % headline_image_gallery.getLength()+1;
             }
         });
-
-        if(mAdapter==null) {
-            mAdapter = new QuickAdapter<HomeNewsBean>(getActivity(), R.layout.item_home_news_layout,homeNewsBeans) {
-                @Override
-                protected void convert(BaseAdapterHelper helper, HomeNewsBean item) {
-                    helper.setText(R.id.item_tv_author_name, item.getAuthorBean().getName())
-                            .setText(R.id.item_tv_author_time, item.getDatetext())
-                            .setText(R.id.item_tv_title, item.getTitle());
-                    //分类标签视图
-                    String mask=item.getMask();
-                    if(mask.equals("全部")){
-                        helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[0]));
-                        helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[0]));
-                        helper.setText(R.id.item_tv_author_mask,mask);
-                    }else if(mask.equals("氪TV")){
-                        helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[1]));
-                        helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[1]));
-                        helper.setText(R.id.item_tv_author_mask, mask);
-                    }else if(mask.equals("O2O")){
-                        helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[2]));
-                        helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[2]));
-                        helper.setText(R.id.item_tv_author_mask, mask);
-                    }else if(mask.equals("新硬件")){
-                        helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[3]));
-                        helper.setBackgroundColor(R.id.item_tv_author_arrow,res.getColor(mask_colors[3]));
-                        helper.setText(R.id.item_tv_author_mask, mask);
-                    }else if(mask.equals("Fun!!")){
-                        helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[4]));
-                        helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[4]));
-                        helper.setText(R.id.item_tv_author_mask, mask);
-                    }else if(mask.equals("企业服务")){
-                        helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[5]));
-                        helper.setBackgroundColor(R.id.item_tv_author_arrow,res.getColor(mask_colors[5]));
-                        helper.setText(R.id.item_tv_author_mask, mask);
-                    }else if(mask.equals("Fit&Health")){
-                        helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[6]));
-                        helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[6]));
-                        helper.setText(R.id.item_tv_author_mask, mask);
-                    }else if(mask.equals("在线教育")){
-                        helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[7]));
-                        helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[7]));
-                        helper.setText(R.id.item_tv_author_mask, mask);
-                    }else if(mask.equals("互联网金融")){
-                        helper.setTextColor(R.id.item_tv_author_mask, res.getColor(mask_colors[8]));
-                        helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[8]));
-                        helper.setText(R.id.item_tv_author_mask, mask);
-                    }else if(mask.equals("大公司")){
-                        helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[9]));
-                        helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[9]));
-                        helper.setText(R.id.item_tv_author_mask, mask);
-                    }else if(mask.equals("专栏")){
-                        helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[10]));
-                        helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[10]));
-                        helper.setText(R.id.item_tv_author_mask, mask);
-                    }else if(mask.equals("新产品")){
-                        helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[11]));
-                        helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[11]));
-                        helper.setText(R.id.item_tv_author_mask, mask);
+        if(homeNewsBeans!=null){
+            //设置控件显示状态
+            lv_pulltorefresh.setVisibility(View.VISIBLE);
+            promt_framelayout.setVisibility(View.GONE);
+            loading.setVisibility(View.GONE);
+            empty.setVisibility(View.GONE);
+            error.setVisibility(View.GONE);
+            if(mAdapter==null) {
+                mAdapter = new QuickAdapter<HomeNewsBean>(getActivity(), R.layout.item_home_news_layout,homeNewsBeans) {
+                    @Override
+                    protected void convert(BaseAdapterHelper helper, HomeNewsBean item) {
+                        helper.setText(R.id.item_tv_author_name, item.getAuthorBean().getName())
+                                .setText(R.id.item_tv_author_time, item.getDatetext())
+                                .setText(R.id.item_tv_title, item.getTitle());
+                        //分类标签视图
+                        String mask=item.getMask();
+                        if(mask.equals("全部")){
+                            helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[0]));
+                            helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[0]));
+                            helper.setText(R.id.item_tv_author_mask,mask);
+                        }else if(mask.equals("氪TV")){
+                            helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[1]));
+                            helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[1]));
+                            helper.setText(R.id.item_tv_author_mask, mask);
+                        }else if(mask.equals("O2O")){
+                            helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[2]));
+                            helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[2]));
+                            helper.setText(R.id.item_tv_author_mask, mask);
+                        }else if(mask.equals("新硬件")){
+                            helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[3]));
+                            helper.setBackgroundColor(R.id.item_tv_author_arrow,res.getColor(mask_colors[3]));
+                            helper.setText(R.id.item_tv_author_mask, mask);
+                        }else if(mask.equals("Fun!!")){
+                            helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[4]));
+                            helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[4]));
+                            helper.setText(R.id.item_tv_author_mask, mask);
+                        }else if(mask.equals("企业服务")){
+                            helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[5]));
+                            helper.setBackgroundColor(R.id.item_tv_author_arrow,res.getColor(mask_colors[5]));
+                            helper.setText(R.id.item_tv_author_mask, mask);
+                        }else if(mask.equals("Fit&Health")){
+                            helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[6]));
+                            helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[6]));
+                            helper.setText(R.id.item_tv_author_mask, mask);
+                        }else if(mask.equals("在线教育")){
+                            helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[7]));
+                            helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[7]));
+                            helper.setText(R.id.item_tv_author_mask, mask);
+                        }else if(mask.equals("互联网金融")){
+                            helper.setTextColor(R.id.item_tv_author_mask, res.getColor(mask_colors[8]));
+                            helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[8]));
+                            helper.setText(R.id.item_tv_author_mask, mask);
+                        }else if(mask.equals("大公司")){
+                            helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[9]));
+                            helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[9]));
+                            helper.setText(R.id.item_tv_author_mask, mask);
+                        }else if(mask.equals("专栏")){
+                            helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[10]));
+                            helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[10]));
+                            helper.setText(R.id.item_tv_author_mask, mask);
+                        }else if(mask.equals("新产品")){
+                            helper.setTextColor(R.id.item_tv_author_mask,res.getColor(mask_colors[11]));
+                            helper.setBackgroundColor(R.id.item_tv_author_arrow, res.getColor(mask_colors[11]));
+                            helper.setText(R.id.item_tv_author_mask, mask);
+                        }
+                        mImageLoder.displayImage(item.getAuthorBean().getAvatar(), (ImageView) helper.getView(R.id.item_img_author_head));
+                        mImageLoder.displayImage(item.getImgurl(),(ImageView)helper.getView(R.id.item_img_logo));
                     }
-                    mImageLoder.displayImage(item.getAuthorBean().getAvatar(), (ImageView) helper.getView(R.id.item_img_author_head));
-                    mImageLoder.displayImage(item.getImgurl(),(ImageView)helper.getView(R.id.item_img_logo));
-                }
-            };
-            lv_pulltorefresh.setAdapter(mAdapter);
+                };
+                lv_pulltorefresh.setAdapter(mAdapter);
+         }
+
+        }else {
+            lv_pulltorefresh.setVisibility(View.GONE);
+            promt_framelayout.setVisibility(View.VISIBLE);
+            loading.setVisibility(View.GONE);
+            empty.setVisibility(View.VISIBLE);
+            error.setVisibility(View.GONE);
         }
     }
     class GalleryIndicatorAdapter extends BaseAdapter {

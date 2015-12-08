@@ -71,7 +71,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public int getItemCount() {
         if(type==2){
-            return 60;
+            return recentNewsBeans!=null?recentNewsBeans.size()+1:0;
         }else {
             return homeNewsBeans != null ? homeNewsBeans.size() + 1 : 0;
         }
@@ -135,6 +135,10 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                ((TvItemViewHolder) holder).item_tv_mask.setText(bean.getMask());
            }else if(holder instanceof RecentViewHolder){
                //近期活动
+                RecentNewsBean recentNewsBean=recentNewsBeans.get(position);
+                ((RecentViewHolder) holder).recent_item_tv_title.setText(recentNewsBean.getTitle());
+                mImageLoder.displayImage(recentNewsBean.getListImageUrl(),((RecentViewHolder) holder).recent_item_img_logo);
+
 
            }
            else if(holder instanceof FootViewHolder){

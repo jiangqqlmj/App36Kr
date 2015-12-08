@@ -22,7 +22,7 @@ public class HeadDataManager {
      }
 	/**
 	 * 进行根据地址抓取顶部广告数据
-	 * @param pUrl
+	 * @param document
 	 * @return
 	 */
 	public List<AdHeadBean> getHeadBeans(Document document){

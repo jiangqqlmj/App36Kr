@@ -65,7 +65,7 @@ public class PageFragment extends BaseFragment implements DefineView{
 
     //进行分页效果--主要用于近期活动列表
     private int page=1;      //页码 默认为第一页
-    private int pageSize=20;   //每页的item数量
+    private int pageSize=65;   //每页的item数量
 
     public static PageFragment newInstance(CategoriesBean extra) {
         Bundle args = new Bundle();

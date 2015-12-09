@@ -30,7 +30,7 @@ import java.util.List;
  * 菜鸟窝是一个只专注做Android开发技能的在线学习平台，课程以实战项目为主，对课程与服务”吹毛求疵”般的要求，
  * 打造极致课程，是菜鸟窝不变的承诺
  */
-public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
     private static final int TYPE_ITEM = 0;     //普通Item View
     private static final int TYPE_TV = 1;       //TV列表
     private static final int TYPE_RECENT = 3;       //近期活动列表
@@ -78,42 +78,65 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             return homeNewsBeans != null ? homeNewsBeans.size() + 1 : 0;
         }
     }
+
+    /**
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //进行判断TV还是普通列表,近期活动，来创建返回不同的View
+        View view=null;
         if(type==0){
             if(viewType==TYPE_TV){
-                View view=mInflater.inflate(R.layout.item_tv_news_layout,parent,false);
+                view=mInflater.inflate(R.layout.item_tv_news_layout,parent,false);
+                view.setOnClickListener(this);
                 return new TvItemViewHolder(view);
             }else if(viewType==TYPE_FOOTER){
-                View foot_view=mInflater.inflate(R.layout.recycler_load_more_layout,parent,false);
-                return new FootViewHolder(foot_view);
+                view=mInflater.inflate(R.layout.recycler_load_more_layout,parent,false);
+                view.setOnClickListener(this);
+                return new FootViewHolder(view);
             }
         }else if(type==1){
             if(viewType==TYPE_ITEM){
-                View view=mInflater.inflate(R.layout.item_home_news_layout,parent,false);
+                view=mInflater.inflate(R.layout.item_home_news_layout,parent,false);
+                view.setOnClickListener(this);
                 return new ItemViewHolder(view);
             }else if(viewType==TYPE_FOOTER){
-                View foot_view=mInflater.inflate(R.layout.recycler_load_more_layout,parent,false);
-                return new FootViewHolder(foot_view);
+                view=mInflater.inflate(R.layout.recycler_load_more_layout,parent,false);
+                view.setOnClickListener(this);
+                return new FootViewHolder(view);
             }
         }else if(type==2){
             //近期活动
             if(viewType==TYPE_RECENT){
-                View view=mInflater.inflate(R.layout.item_recent_news_layout,parent,false);
+                view=mInflater.inflate(R.layout.item_recent_news_layout,parent,false);
+                view.setOnClickListener(this);
                 return new RecentViewHolder(view);
             }else if(viewType==TYPE_FOOTER){
-                View foot_view=mInflater.inflate(R.layout.recycler_load_more_layout,parent,false);
-                return new FootViewHolder(foot_view);
+                view=mInflater.inflate(R.layout.recycler_load_more_layout,parent,false);
+                view.setOnClickListener(this);
+                return new FootViewHolder(view);
             }
         }
+
         return null;
     }
 
+    /**
+     *
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+           //给holder进行绑定tag索引
+
            if(holder instanceof  ItemViewHolder){
                HomeNewsBean bean=homeNewsBeans.get(position);
+               holder.itemView.setTag(bean);
                mImageLoder.displayImage(bean.getAuthorBean().getAvatar(),((ItemViewHolder) holder).item_img_author_head);
                ((ItemViewHolder) holder).item_tv_author_name.setText(bean.getAuthorBean().getName());
                ((ItemViewHolder) holder).item_tv_author_time.setText(bean.getDatetext());
@@ -131,6 +154,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
            }else if(holder instanceof TvItemViewHolder){
                //TV页面数据显示
                HomeNewsBean bean=homeNewsBeans.get(position);
+               holder.itemView.setTag(bean);
                mImageLoder.displayImage(bean.getImgurl(),((TvItemViewHolder) holder).item_tv_img);
                ((TvItemViewHolder) holder).item_tv_title.setText(bean.getTitle());
                //分类标签视图
@@ -138,6 +162,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
            }else if(holder instanceof RecentViewHolder){
                //近期活动
                 RecentNewsBean recentNewsBean=recentNewsBeans.get(position);
+                holder.itemView.setTag(recentNewsBean);
                 ((RecentViewHolder) holder).recent_item_tv_title.setText(recentNewsBean.getTitle());
                 mImageLoder.displayImage(recentNewsBean.getListImageUrl(), ((RecentViewHolder) holder).recent_item_img_logo);
                 //活动地点
@@ -199,6 +224,19 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                  return TYPE_ITEM;
              }
          }
+    }
+
+    @Override
+    public void onClick(View v) {
+           if(onItemClickListener!=null){
+               if(v.getTag() instanceof HomeNewsBean){
+                   onItemClickListener.onItemClick(v,(HomeNewsBean)v.getTag());
+               }else if(v.getTag() instanceof RecentNewsBean){
+                   onItemClickListener.onItemClick(v,(RecentNewsBean)v.getTag());
+               }else {
+                   onItemClickListener.onItemClick(v,"上拉加载更多");
+               }
+           }
     }
 
     /**
@@ -277,4 +315,21 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         holder.item_tv_author_mask.setTextColor(res.getColor(mask_colors[position]));
         holder.item_tv_author_arrow.setBackgroundColor(res.getColor(mask_colors[position]));
     }
+
+    //******************Item 添加类OnItemClickListener 时间监听方法*******************
+    public interface OnItemClickListener{
+        /**
+         * 当内部的Item发生点击的时候 调用Item点击回调方法
+         * @param view      点击的View
+         * @param object    回调的数据
+         */
+        void onItemClick(View view,Object object);
+    }
+
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
 }

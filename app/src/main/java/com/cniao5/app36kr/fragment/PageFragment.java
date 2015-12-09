@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.adapter.HomeRecyclerAdapter;
@@ -153,7 +154,6 @@ public class PageFragment extends BaseFragment implements DefineView{
                     }
                 }else {
                     recentNewsBeans = RecentDataManager.getRecentDatas(response.body().string());
-                    Log.d("zttjiangqq", recentNewsBeans.toString());
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -164,10 +164,23 @@ public class PageFragment extends BaseFragment implements DefineView{
             }
         });
     }
-
     @Override
     public void initListener() {
+        //给Adapter添加点击事件
+        adapter.setOnItemClickListener(new HomeRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, Object object) {
+                if(object instanceof RecentNewsBean){
+                     //近期活动
+                }else if(object instanceof HomeNewsBean){
+                     //首页列表信息包括氪TV
 
+                }else {
+                }
+                Log.d("zttjiangqq","点击的数据为:"+object.toString());
+                Toast.makeText(getActivity(),"点击了:"+object.toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

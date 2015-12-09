@@ -180,9 +180,7 @@ public class HomeFragment extends BaseFragment implements DefineView{
                                 % headline_image_gallery.getLength();
                         galleryFlowIndicator
                                 .setSeletion(circleSelectedPosition);
-
                     }
-
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
 

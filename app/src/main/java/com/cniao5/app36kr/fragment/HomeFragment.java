@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.adapter.quick.BaseAdapterHelper;
@@ -151,6 +152,32 @@ public class HomeFragment extends BaseFragment implements DefineView{
 
     @Override
     public void initListener() {
+        //gallery点击选中事件
+        headline_image_gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int index=position
+                        % headline_image_gallery.getLength()+1;
+                Toast.makeText(getActivity(),"广告轮播点击了第"+index+"项",Toast.LENGTH_SHORT).show();
+            }
+        });
+        //列表点击事件
+        lv_pulltorefresh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(),"点击了:"+homeNewsBeans.get((int)id).toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        //列表进行下拉刷新事件
+        lv_pulltorefresh.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(getActivity(),"开始下拉刷新",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     @Override
@@ -181,19 +208,13 @@ public class HomeFragment extends BaseFragment implements DefineView{
                         galleryFlowIndicator
                                 .setSeletion(circleSelectedPosition);
                     }
+
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
 
                     }
                 });
-        //gallery点击选中事件
-        headline_image_gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int index=position
-                        % headline_image_gallery.getLength()+1;
-            }
-        });
+
         if(homeNewsBeans!=null){
             //设置控件显示状态
             lv_pulltorefresh.setVisibility(View.VISIBLE);

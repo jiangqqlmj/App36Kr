@@ -13,11 +13,13 @@ import android.widget.TextView;
 import com.cniao5.app36kr.R;
 import com.cniao5.app36kr.entity.HomeNewsBean;
 import com.cniao5.app36kr.entity.RecentNewsBean;
+import com.cniao5.app36kr.utils.DateUtil;
 import com.cniao5.app36kr.widget.RoundAngleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.w3c.dom.Text;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +33,7 @@ import java.util.List;
 public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private static final int TYPE_ITEM = 0;     //普通Item View
     private static final int TYPE_TV = 1;       //TV列表
-    private static final int TYPE_RECENT = 2;       //近期活动列表
+    private static final int TYPE_RECENT = 3;       //近期活动列表
     private static final int TYPE_FOOTER = 2;   //顶部FootView
 
     //界面类型  TV页面或者普通列表  0表示TV ,1表示列表
@@ -137,11 +139,37 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                //近期活动
                 RecentNewsBean recentNewsBean=recentNewsBeans.get(position);
                 ((RecentViewHolder) holder).recent_item_tv_title.setText(recentNewsBean.getTitle());
-                mImageLoder.displayImage(recentNewsBean.getListImageUrl(),((RecentViewHolder) holder).recent_item_img_logo);
-
-
+                mImageLoder.displayImage(recentNewsBean.getListImageUrl(), ((RecentViewHolder) holder).recent_item_img_logo);
+                //活动地点
+               ((RecentViewHolder) holder).recent_item_tv_location.setText(recentNewsBean.getCity());
+                //活动开始时间设置
+               String beginDate=DateUtil.getFormatDate(new Date(Long.parseLong(recentNewsBean.getActivityBeginTime())));
+               String endDate=DateUtil.getFormatDate(new Date(Long.parseLong(recentNewsBean.getActivityEndTime())));
+               if (beginDate.equals(endDate)) {
+                   ((RecentViewHolder) holder).recent_item_tv_timetext.setText(beginDate);
+               }else {
+                   ((RecentViewHolder) holder).recent_item_tv_timetext.setText(beginDate+"到"+endDate);
+               }
+               //报名状态
+               long nowTime=System.currentTimeMillis();
+               long begin=Long.parseLong(recentNewsBean.getActivityBeginTime());
+               long end=Long.parseLong(recentNewsBean.getActivityEndTime());
+               if(nowTime<=begin){
+                   //报名中
+                   ((RecentViewHolder) holder).recent_item_tv_status.setText("报名中");
+                   ((RecentViewHolder) holder).recent_item_tv_status.setBackgroundResource(R.drawable.icon_activity_jin);
+               }else if(nowTime>begin&&nowTime<=end){
+                   //活动中
+                   ((RecentViewHolder) holder).recent_item_tv_status.setText("活动中");
+                   ((RecentViewHolder) holder).recent_item_tv_status.setBackgroundResource(R.drawable.icon_activity_wei);
+               }else {
+                   //已结束
+                   ((RecentViewHolder) holder).recent_item_tv_status.setText("已结束");
+                   ((RecentViewHolder) holder).recent_item_tv_status.setBackgroundResource(R.drawable.icon_activity_yi);
+               }
            }
            else if(holder instanceof FootViewHolder){
+
            }
     }
 

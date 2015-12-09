@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/App36Kr.iml" filepath="$PROJECT_DIR$/App36Kr.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ViewPagerIndicator/ViewPagerIndicator.iml" filepath="$PROJECT_DIR$/ViewPagerIndicator/ViewPagerIndicator.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -165,8 +165,9 @@ public class HomeFragment extends BaseFragment implements DefineView{
         lv_pulltorefresh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                openActivity(DetailsActivity.class);
-                Toast.makeText(getActivity(),"点击了:"+homeNewsBeans.get((int)id).toString(),Toast.LENGTH_SHORT).show();
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("news_bean", homeNewsBeans.get((int) id));
+                openActivityWithBundle(DetailsActivity.class, bundle);
             }
         });
         //列表进行下拉刷新事件

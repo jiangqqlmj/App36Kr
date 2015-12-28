@@ -6,27 +6,68 @@
     android:background="@color/color_white">
     <!--顶部导航栏布局-->
     <include layout="@layout/details_top_bar_layout" />
-    <!--中间内容-->
-    <!--标题与作者信息-->
-    <TextView
-        android:layout_margin="8dp"
-        android:textSize="22dp"
-        android:text="重大利好：注册制授权决定通过 明年3月起施行"
-        android:id="@+id/details_title"
-        android:maxLines="2"
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="fill_parent">
+    <!--中间内容-->
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <com.cniao5.app36kr.widget.RoundAngleImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            app:roundWidth="10dp"
-            app:roundHeight="10dp"
-            android:scaleType="fitXY" />
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+        <!--标题与作者信息-->
+        <TextView
+            android:layout_margin="8dp"
+            android:textSize="20dp"
+            android:id="@+id/details_title"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+            <com.cniao5.app36kr.widget.RoundAngleImageView
+                android:id="@+id/details_avatar"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                app:roundWidth="13dp"
+                app:roundHeight="13dp"
+                android:scaleType="fitXY" />
+            <TextView
+                android:id="@+id/details_name"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/color_tab_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/details_time"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/color_tab_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/details_ad"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <!--文章内容-->
+        <WebView
+            android:id="@+id/details_content"
+            android:scrollbars="none"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"></WebView>
     </LinearLayout>
-    <!--文章内容-->
+    </ScrollView>
     <!--底部Bar功能-->
 </LinearLayout>

@@ -9,8 +9,10 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.cniao5.app36kr.R;
+import com.squareup.okhttp.OkHttpClient;
 
 import java.lang.reflect.Field;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 当前类注释:基类Activity 继承自FragmentActivity
@@ -21,6 +23,13 @@ import java.lang.reflect.Field;
  * 打造极致课程，是菜鸟窝不变的承诺
  */
 public class BaseActivity extends FragmentActivity{
+    protected static OkHttpClient client=null;
+    static {
+        client=new OkHttpClient();
+        client.setConnectTimeout(10, TimeUnit.SECONDS);
+        client.setReadTimeout(30, TimeUnit.SECONDS);
+        client.setWriteTimeout(30,TimeUnit.SECONDS);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

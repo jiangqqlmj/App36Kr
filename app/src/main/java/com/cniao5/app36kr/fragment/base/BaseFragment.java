@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.squareup.okhttp.OkHttpClient;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -34,6 +35,11 @@ public class BaseFragment extends Fragment {
 
     protected void openActivity(Class<?> pClass){
         Intent mIntent=new Intent(getActivity(),pClass);
+        getActivity().startActivity(mIntent);
+    }
+    protected void openActivityWithBundle(Class<?> pClass,Bundle bundle){
+        Intent mIntent=new Intent(getActivity(),pClass);
+        mIntent.putExtras(bundle);
         getActivity().startActivity(mIntent);
     }
 }

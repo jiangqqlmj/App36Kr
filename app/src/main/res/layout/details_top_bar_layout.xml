@@ -30,7 +30,7 @@
             android:layout_centerVertical="true"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/news_icon_krtv_share"/>
+            android:background="@drawable/btn_share_selector"/>
 
         <Button
             android:id="@+id/btn_font"
@@ -39,7 +39,7 @@
             android:layout_centerVertical="true"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/news_icon_font"/>
+            android:background="@drawable/btn_font_selector"/>
         <Button
             android:id="@+id/btn_night"
             android:layout_marginRight="5dp"
@@ -47,6 +47,6 @@
             android:layout_centerVertical="true"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/icon_night"/>
+            android:background="@drawable/btn_night_selector"/>
     </RelativeLayout>
 </RelativeLayout>

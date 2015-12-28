@@ -1,12 +1,14 @@
 package com.cniao5.app36kr.entity;
 
+import java.io.Serializable;
+
 /**
  * 作者用户信息实体类
  * 
  * @author jiangqq
  *
  */
-public class AuthorBean {
+public class AuthorBean implements Serializable{
 	private String name; // 作者名字
 	private String avatar; // 作者头像
 	private String href; // 作者主页地址

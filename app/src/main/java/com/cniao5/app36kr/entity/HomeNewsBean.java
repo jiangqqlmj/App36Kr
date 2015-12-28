@@ -1,12 +1,15 @@
 package com.cniao5.app36kr.entity;
 
+import java.io.Serializable;
+
 /**
  * 首页列表数据信息实体类
  * 
  * @author jiangqq
  *
  */
-public class HomeNewsBean {
+public class HomeNewsBean implements  Serializable{
+
 	private String tId;  //文章ID
 	private String imgurl; // 文章列表缩略图片
 	private String mask; // 文章类型

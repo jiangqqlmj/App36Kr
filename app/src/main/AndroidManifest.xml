@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.MainActivity" android:theme="@style/App_Theme"/>
+        <activity android:name=".ui.DetailsActivity"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>

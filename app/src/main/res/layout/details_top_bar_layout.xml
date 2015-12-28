@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="49dp"
+    android:background="@color/mask_tags_8"
+    android:id="@+id/bar_layout"
+    android:gravity="bottom"
+    >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="49dp">
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_back_selector"/>
+        <TextView
+            android:layout_centerInParent="true"
+            android:text="文章详情"
+            android:textSize="18sp"
+            android:textColor="@color/color_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_share"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/news_icon_krtv_share"/>
+
+        <Button
+            android:id="@+id/btn_font"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@id/btn_share"
+            android:layout_centerVertical="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/news_icon_font"/>
+        <Button
+            android:id="@+id/btn_night"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/btn_font"
+            android:layout_centerVertical="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/icon_night"/>
+    </RelativeLayout>
+</RelativeLayout>

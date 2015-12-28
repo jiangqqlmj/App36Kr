@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white">
+    <!--顶部导航栏布局-->
+    <include layout="@layout/details_top_bar_layout" />
+    <!--中间内容-->
+    <!--标题与作者信息-->
+    <TextView
+        android:layout_margin="8dp"
+        android:textSize="22dp"
+        android:text="重大利好：注册制授权决定通过 明年3月起施行"
+        android:id="@+id/details_title"
+        android:maxLines="2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.cniao5.app36kr.widget.RoundAngleImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:roundWidth="10dp"
+            app:roundHeight="10dp"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+    <!--文章内容-->
+    <!--底部Bar功能-->
+</LinearLayout>

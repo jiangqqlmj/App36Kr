@@ -24,6 +24,7 @@ import com.cniao5.app36kr.entity.AdHeadBean;
 import com.cniao5.app36kr.entity.CategoriesBean;
 import com.cniao5.app36kr.entity.HomeNewsBean;
 import com.cniao5.app36kr.fragment.base.BaseFragment;
+import com.cniao5.app36kr.ui.DetailsActivity;
 import com.cniao5.app36kr.widget.AutoGallery;
 import com.cniao5.app36kr.widget.FlowIndicator;
 import com.cniao5.app36kr.widget.PullToRefreshListView;
@@ -147,7 +148,6 @@ public class HomeFragment extends BaseFragment implements DefineView{
             }
         });
 
-
     }
 
     @Override
@@ -163,9 +163,9 @@ public class HomeFragment extends BaseFragment implements DefineView{
         });
         //列表点击事件
         lv_pulltorefresh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                openActivity(DetailsActivity.class);
                 Toast.makeText(getActivity(),"点击了:"+homeNewsBeans.get((int)id).toString(),Toast.LENGTH_SHORT).show();
             }
         });

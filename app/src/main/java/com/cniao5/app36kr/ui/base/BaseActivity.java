@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.cniao5.app36kr.R;
 
@@ -32,9 +33,35 @@ public class BaseActivity extends FragmentActivity{
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
     }
+    /**
+     * 进行打开新的Activity
+     * @param pClass
+     */
     protected void openActivity(Class<?> pClass){
         Intent mIntent=new Intent(this,pClass);
         this.startActivity(mIntent);
+    }
+
+    /**
+     * 进行关闭Activity
+     */
+    protected void finishActivity(){
+        this.finish();
+    }
+
+    /**
+     * 根据提示语 弹出短Toast
+     * @param msg
+     */
+    protected void showShortToast(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
+    /**
+     * 根据提示语 弹出长Toast
+     * @param msg
+     */
+    protected void showLongToast(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
     }
 
     /**
